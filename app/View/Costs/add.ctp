@@ -3,7 +3,9 @@
 	<fieldset>
 		<legend><?php echo __('Add Cost'); ?></legend>
 	<?php
-		echo $this->Form->input('week');
+		echo $this->Form->input('date', array('dateFormat' => 'DMY'
+											  , 'minYear' => date('Y') + 1
+                        					  , 'maxYear' => date('Y') - 1 ));
 		echo $this->Form->input('user_id');
 		echo $this->Form->input('project_id');
 		echo $this->Form->input('billinghours');

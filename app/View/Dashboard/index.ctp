@@ -1,5 +1,11 @@
 <?php echo $this->Html->script('http://code.highcharts.com/highcharts.js'); ?>
-<?php echo $this->Html->script('charts/eservices-highcharts'); ?>
+<?php //echo $this->Html->script('charts/eservices-highcharts'); ?>
+<?php debug( $listCostvsDateForHC)?>
+<?php debug( $datax)?>
+
+// <?php //$endDate = strtotime('2013-12-31');  
+// for($i = strtotime('Monday', strtotime('2013-01-01')); $i <= $endDate; $i = strtotime('+1 week', $i))
+//     echo date('l M d Y', $i); ?>
 <div class="container-fluid" >
     <div class="row-fluid">
         <div class="span12">
@@ -57,5 +63,58 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(function () { 
+        // Highcharts Global Options
+        Highcharts.setOptions({
+            chart: {
+                renderTo: 'container-charts',
+                borderWidth: 1,
+                borderColor: '#383951',
+                
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    month: '%e. %b',
+                    
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Dollar Amount'
+                },
+                min: 0
+            },
+            credits: { 
+                enabled: true,
+                href: 'http://www.ipro.org',
+                text: 'IPRO',
+            },
+        });
 
+        $('#container-charts').highcharts({
+            
+            title: {
+                text: 'Project Cost'
+            },
+ 
 
+            series: [{
+                name: 'Jane',
+                data: [ 
+                    <?php echo $listCostvsDateForHC; ?>
+                ]
+            }, {
+                name: 'Budget',
+                color: '#FF0000',
+                data: [
+                    [1357002863000 , 5   ],
+                    [1359940463000 , 5   ],
+                ]        
+            }]
+        });
+    });
+});
+</script>
