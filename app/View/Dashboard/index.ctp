@@ -1,6 +1,6 @@
 <?php echo $this->Html->script('http://code.highcharts.com/highcharts.js'); ?>
 <?php //echo $this->Html->script('charts/eservices-highcharts'); ?>
-<?php debug( $listCostvsDateForHC)?>
+<?php debug( $finalHcliteralSeries)?>
 <?php debug( $datax)?>
 
 // <?php //$endDate = strtotime('2013-12-31');  
@@ -101,19 +101,10 @@ $(document).ready(function() {
             },
  
 
-            series: [{
-                name: 'Jane',
-                data: [ 
-                    <?php echo $listCostvsDateForHC; ?>
-                ]
-            }, {
-                name: 'Budget',
-                color: '#FF0000',
-                data: [
-                    [1357002863000 , 5   ],
-                    [1359940463000 , 5   ],
-                ]        
-            }]
+            series: [
+                    <?php echo $finalHcliteralSeries; ?>
+                
+            ]
         });
     });
 });

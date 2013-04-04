@@ -23,25 +23,39 @@ class DashboardController extends AppController {
 
         foreach( $rawData as $arrData) {
             // array of array of timestamp in milliseconds and billing hours
-            $datax[$arrData['User']['firstname']][] =  array( strtotime($arrData['Cost']['date']) * 1000 , $arrData['Cost']['billinghours'] );
+            $arrBillingHoursUsers[$arrData['User']['firstname']][] =  array( strtotime($arrData['Cost']['date']) * 1000 , $arrData['Cost']['billinghours'] );
            
         }
-        debug($datax); die;
-          $listCostvsDateForHC = $this->_formatSerieToHighcharts($datax);
-          $this->set('listCostvsDateForHC', $listCostvsDateForHC );
-          $this->set('datax', $datax );
+        
+          $finalHcliteralSeries = $this->_formatSerieToHighcharts($arrBillingHoursUsers);
+          $this->set('finalHcliteralSeries', $finalHcliteralSeries );
+          $this->set('datax', $arrBillingHoursUsers );
+          debug( $finalHcliteralSeries); 
     } 
     /**
      * Format an array of array into a string of x,y pairs
-     * to match the data series in HighCharts:
-     * data : [ [x1,y1],[x2,y2],....]
+     * to match the data series format in HighCharts:
+     * { name : 'John' , data:  [ [x1,y1],[x2,y2],....] }
      * 
      **/
-    protected function _formatSerieToHighcharts( $datax ) {
-        foreach ($datax as $pair) {
-            $values[] = "[" .implode($pair, ",") . "]";
-        }      
-        $point = implode ($values, ",") ;
-        return $point;
+    protected function _formatSerieToHighcharts( $arrBillingHoursUsers ) { 
+        $hcSeries = "";
+        if ( !empty( $arrBillingHoursUsers)) {
+
+            $finalHcliteralSeries = "" ;
+            foreach ($arrBillingHoursUsers as $User => $arrBillingHours) {
+
+                $hcSeries = "{ name: '" . $User . "' , data : [";
+                $dateVsHours = "";
+                foreach ($arrBillingHours as $arrBillingHour) {
+                    $dateVsHours .= "[" .implode($arrBillingHour, ",") . "],";
+                }
+                $dateVsHours = rtrim( $dateVsHours, ',');
+                $hcSeries .= $dateVsHours . "]} ,";
+                $finalHcliteralSeries .= $hcSeries ;
+            }
+            $finalHcliteralSeries = rtrim( $finalHcliteralSeries, ",");      
+        }
+        return $finalHcliteralSeries;
     }
 }
