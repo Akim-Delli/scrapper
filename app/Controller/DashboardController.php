@@ -6,7 +6,7 @@
  * @property Dashboard $User
  */
 class DashboardController extends AppController {
-    var $uses = array('Cost');
+    var $uses = array('Cost', 'Project');
 
     public $helpers = array('Time');
 
@@ -17,7 +17,8 @@ class DashboardController extends AppController {
      */
     public function index() {
          $rawData = $this->Cost->find('all', array('conditions' => array('Project.id' => 1),
-                                                          'fields'     => array( 'date', 'billinghours', 'fixedcost', 'User.firstname', 'Project.project_name')
+                                                          'fields'     => array( 'date', 'billinghours', 'fixedcost', 'User.firstname', 'Project.project_name'),
+                                                          'order' => 'date ASC',
                                                           )
                                             );
 
@@ -30,7 +31,6 @@ class DashboardController extends AppController {
           $finalHcliteralSeries = $this->_formatSerieToHighcharts($arrBillingHoursUsers);
           $this->set('finalHcliteralSeries', $finalHcliteralSeries );
           $this->set('datax', $arrBillingHoursUsers );
-          debug( $finalHcliteralSeries); 
     } 
     /**
      * Format an array of array into a string of x,y pairs
@@ -39,16 +39,19 @@ class DashboardController extends AppController {
      * 
      **/
     protected function _formatSerieToHighcharts( $arrBillingHoursUsers ) { 
-        $hcSeries = "";
+        
         if ( !empty( $arrBillingHoursUsers)) {
 
             $finalHcliteralSeries = "" ;
+            $hcSeries = "";
             foreach ($arrBillingHoursUsers as $User => $arrBillingHours) {
-
-                $hcSeries = "{ name: '" . $User . "' , data : [";
+                // Timestamp : 1357020060000 = January 1st, 2013
+                $hcSeries = "{ name: '" . $User . "' , data : [[1357020060000,0],";
                 $dateVsHours = "";
+                $billingHoursCumulative = 0;
                 foreach ($arrBillingHours as $arrBillingHour) {
-                    $dateVsHours .= "[" .implode($arrBillingHour, ",") . "],";
+                    $billingHoursCumulative = $billingHoursCumulative + $arrBillingHour[1];
+                    $dateVsHours .= "[" .$arrBillingHour[0].",".$billingHoursCumulative . "],";
                 }
                 $dateVsHours = rtrim( $dateVsHours, ',');
                 $hcSeries .= $dateVsHours . "]} ,";

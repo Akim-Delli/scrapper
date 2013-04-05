@@ -1,4 +1,6 @@
 <?php echo $this->Html->script('http://code.highcharts.com/highcharts.js'); ?>
+<?php echo $this->Html->script('http://code.highcharts.com/modules/exporting.js'); ?>
+
 <?php //echo $this->Html->script('charts/eservices-highcharts'); ?>
 <?php debug( $finalHcliteralSeries)?>
 <?php debug( $datax)?>
@@ -102,8 +104,7 @@ $(document).ready(function() {
  
 
             series: [
-                    <?php echo $finalHcliteralSeries; ?>
-                
+                    <?php echo $finalHcliteralSeries; ?>  
             ]
         });
     });

@@ -46,8 +46,12 @@ class CostsController extends AppController {
 			}
 		}
 		$users = $this->Cost->User->find('list');
+		$usersfirstname = $this->Cost->User->find('list', array('fields'  => 'User.firstname'));
+
 		$projects = $this->Cost->Project->find('list');
-		$this->set(compact('users', 'projects'));
+		$projectslist = $this->Cost->Project->find('list', array('fields'  => 'Project.project_name'));
+		debug($projectslist);
+		$this->set(compact('users', 'usersfirstname', 'projects', 'projectslist'));
 	}
 
 /**
