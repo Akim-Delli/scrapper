@@ -6,7 +6,7 @@
  * @property Dashboard $User
  */
 class DashboardController extends AppController {
-    var $uses = array('Cost', 'Project');
+    var $uses = array('Cost', 'Project', 'User');
 
     public $helpers = array('Time');
 
@@ -17,33 +17,36 @@ class DashboardController extends AppController {
      */
     public function index() {
 
-        if ($this->request->is('post')) {
-            $this->Cost->create();
-            if ($this->Cost->save($this->request->data)) {
-                $this->Session->setFlash(__('Cost saved.'));
-            } else {
-            }
-        }
+        
 
-        $projectsListId = $this->Project->find('list', array('fields'     => 'id'));
+        $projectsListId = $this->Project->find('list', array('fields'     => array('id', 'project_name')));
+        $usersRatePerHour = $this->User->find('list', array('fields' => array('firstname', 'costrate')));
 
-        foreach ( $projectsListId as $projectId) {
+
+        foreach ( $projectsListId as $projectId => $projectName) {
              $rawData = $this->Cost->find('all', array('conditions' => array('Project.id' => $projectId),
                                                               'fields'     => array( 'date', 'billinghours', 'fixedcost', 'User.firstname', 'Project.project_name'),
                                                               'order' => 'date ASC',
                                                               )
                                                 );
-
-             //debug( $rawData); 
+             
              $arrBillingHoursUsers = array();
+             $arrTotalBillingHours = array();
             foreach( $rawData as $arrData) {
-                // array of array of timestamp in milliseconds and billing hours
-                $arrBillingHoursUsers[$arrData['User']['firstname']][] =  array( strtotime($arrData['Cost']['date']) * 1000 , $arrData['Cost']['billinghours'] );
-               
+
+                if ( isset( $usersRatePerHour[$arrData['User']['firstname']])) {
+                    // array of array of timestamp in milliseconds and billing hours time the cost per rate for each user
+                    $arrBillingHoursUsers[$arrData['User']['firstname']][] =  array( strtotime($arrData['Cost']['date']) * 1000 , 
+                                                                                     $arrData['Cost']['billinghours'] * $usersRatePerHour[$arrData['User']['firstname']] );   
+                    $arrTotalBillingHours[] =  array( strtotime($arrData['Cost']['date']) * 1000 , 
+                                                                                     $arrData['Cost']['billinghours'] * $usersRatePerHour[$arrData['User']['firstname']] );   
+                
+                } else {
+                    throw new Exception( $arrData['User']['firstname'] . " has no cost rate per hour", 1); 
+                }           
             }
             
-            $finalHcliteralSeries[] = $this->_formatSerieToHighcharts($arrBillingHoursUsers);
-            
+            $finalHcliteralSeries[] = $this->_formatSerieToHighchartsTotalCost($arrTotalBillingHours) . $this->_formatSerieToHighcharts( $arrBillingHoursUsers);           
         }
             $this->set('finalHcliteralSeries', $finalHcliteralSeries );
 
@@ -53,6 +56,17 @@ class DashboardController extends AppController {
             $projects = $this->Cost->Project->find('list');
             $projectslist = $this->Cost->Project->find('list', array('fields'  => 'Project.project_name'));
             $this->set(compact('users', 'usersfirstname', 'projects', 'projectslist'));
+
+
+
+            //  cost form Post request
+            if ($this->request->is('post')) {
+            $this->Cost->create();
+            if ($this->Cost->save($this->request->data)) {
+                $this->Session->setFlash(__('Cost saved.', 'default', array('class' => 'alert alert-info')));
+            } else {
+            }
+        }
     } 
     /**
      * Format an array of array into a string of x,y pairs
@@ -81,8 +95,26 @@ class DashboardController extends AppController {
             }
             $finalHcliteralSeries = rtrim( $finalHcliteralSeries, ",");      
         } else {
-            $finalHcliteralSeries = "{ name : 'no User', data : [[1357020060000,0]]}";  
+            $finalHcliteralSeries = "{ name : 'no Team Member on this project', data : [[1357020060000,0]]}";  
         }
         return $finalHcliteralSeries;
+    }
+
+    protected function _formatSerieToHighchartsTotalCost( $arrTotalBillingHours ) { 
+
+        if ( !empty( $arrTotalBillingHours)) {
+            $totalCostHcliteralSeries = "{ name: 'Total Cost', color : '#ff4e50', lineWidth: 4, data : [[1357020060000,0],";
+            $totalCost = 0;
+
+            foreach ( $arrTotalBillingHours as $arrBillHour) {
+                
+                $totalCost = $totalCost + $arrBillHour[1];
+                 $totalCostHcliteralSeries =  $totalCostHcliteralSeries . "[" . $arrBillHour[0] . "," . $totalCost ."],";
+                 
+            }
+            $totalCostHcliteralSeries = rtrim( $totalCostHcliteralSeries, ",");
+            $totalCostHcliteralSeries = $totalCostHcliteralSeries . "]} ,";
+        }
+        return $totalCostHcliteralSeries;
     }
 }

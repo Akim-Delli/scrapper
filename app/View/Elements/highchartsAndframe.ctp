@@ -6,7 +6,7 @@
                         <span class="icon">
                             <i class="icon-signal"></i>
                         </span>
-                        <h5>Project Statistics</h5>
+                        <h5>Project : <?php echo $ProjectName; ?></h5>
                         <div class="buttons">
                             <a class="btn btn-mini" href="#">
                                 <i class="icon-refresh"></i>
@@ -40,7 +40,7 @@
                                 <small>Total Orders</small>
                                 </li>
                                 <li>
-                                <i class="icon-repeat"></i>
+                                <i class="icon-money"></i>
                                 <strong>29</strong>
                                 <small>Pending Orders</small>
                                 </li>
@@ -90,7 +90,7 @@ $(document).ready(function() {
         $('#container-charts-<?php echo $SerieId ?>').highcharts({
             
             title: {
-                text: 'Project Cost'
+                text: '<?php echo $ProjectName; ?>' 
             },
  
 

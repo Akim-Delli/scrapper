@@ -54,8 +54,8 @@ $(document).ready(function(){
             e.preventDefault();
             $(this).parent().addClass('active'). // <li>
             siblings().removeClass('active');
-  });
-});
+        });
+    });
 
     // === Resize window related === //
     $(window).resize(function()
@@ -126,5 +126,13 @@ $(document).ready(function(){
     $('.skin-color').attr('href','css/unicorn.'+style+'.css');
     $(this).siblings('a').css({'border-color':'transparent'});
     $(this).css({'border-color':'#aaaaaa'});
+    });
+
+    $("div.widget-title").click(function () {
+      if ($(this).next().is(":hidden")) {
+        $(this).next().show("slow");
+      } else {
+        $(this).next().slideUp( );
+      }
     });
 }); 
