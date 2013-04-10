@@ -2,7 +2,7 @@
 <?php echo $this->Html->script('http://code.highcharts.com/modules/exporting.js'); ?>
 
 <?php //echo $this->Html->script('charts/eservices-highcharts'); ?>
-<?php// debug( $finalHcliteralSeries)?>
+<?php //debug( $finalHcliteralSeries)?>
 
 <div id="content-header">
     <h1>Dashboard</h1>

@@ -14,6 +14,9 @@ class ProjectsController extends AppController {
  */
 	public $helpers = array('Js');
 
+	//Disable the layout
+    public    $layout = false;
+
 /**
  * index method
  *

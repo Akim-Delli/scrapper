@@ -55,6 +55,11 @@ $cakeDescription = __d('cake_dev', 'eServices: Project Cost Tracker');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
+
+        //Highcharts Libraries
+        echo $this->Html->script('http://code.highcharts.com/highcharts.js'); 
+        echo $this->Html->script('http://code.highcharts.com/modules/exporting.js');
+
 	?>
 </head>
 <body>
@@ -66,9 +71,9 @@ $cakeDescription = __d('cake_dev', 'eServices: Project Cost Tracker');
 		<div id="sidebar">
 			<ul style="display: block;">
             
-            	<li class="active"><a href='#'><i class="icon icon-home"></i><span>Dashboard</span></a></li>
+            	<li class="active"><a class="ajaxify" href='/dashboard/index'><i class="icon icon-home"></i><span>Dashboard</span></a></li>
             	<li class="submenu">
-            			<a href='#'>
+            			<a class="ajaxify" href='#'>
             				<i class="icon icon-briefcase"></i>
             				<span>Projects</span>
             			</a>
@@ -106,6 +111,9 @@ $cakeDescription = __d('cake_dev', 'eServices: Project Cost Tracker');
             	
         </div>
 		<div id="content">
+            <div id="content-header">
+                <h1></h1>
+            </div>
 
 			<?php echo $this->Session->flash(); ?>
 
@@ -120,16 +128,16 @@ $cakeDescription = __d('cake_dev', 'eServices: Project Cost Tracker');
 			?>
 		</div>
 	 
-	<?php //echo $this->element('sql_dump'); 
- 		echo $this->Html->script('jquery-1.9.1.min');
- 		echo $this->Html->script('jquery.ui.custom');
- 		echo $this->Html->script('jquery.uniform');
+	 <?php //echo $this->element('sql_dump'); 
+ // 		echo $this->Html->script('jquery-1.9.1.min');
+ // 		echo $this->Html->script('jquery.ui.custom');
+ // 		echo $this->Html->script('jquery.uniform');
 
-		// echo $this->Html->script('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js');
-        //echo $this->Html->script('bootstrap');
-        echo $this->Html->script('bootstrap.min');
-        echo $this->Html->script('select2.min');
-        echo $this->Html->script('eservices');
+	// 	// echo $this->Html->script('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js');
+ //        //echo $this->Html->script('bootstrap');
+ //        echo $this->Html->script('bootstrap.min');
+ //        echo $this->Html->script('select2.min');
+ //        echo $this->Html->script('eservices');
         
 	?>
 </body>

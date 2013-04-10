@@ -7,6 +7,9 @@ App::uses('AppController', 'Controller');
  */
 class CostsController extends AppController {
 
+//Disable the layout
+  public    $layout = false;
+
 /**
  * index method
  *

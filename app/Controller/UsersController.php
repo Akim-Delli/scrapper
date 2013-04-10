@@ -7,6 +7,11 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+
+//Disable the layout
+  public    $layout = false;
+
+
 /**
  * index method
  *

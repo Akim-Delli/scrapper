@@ -1,27 +1,56 @@
-<div class="users form">
-<?php echo $this->Form->create('User'); ?>
-	<fieldset>
-		<legend><?php echo __('Add User'); ?></legend>
-	<?php
-		echo $this->Form->input('firstname');
-		echo $this->Form->input('lastname');
-		echo $this->Form->input('email');
-		echo $this->Form->input('costrate');
-		echo $this->Form->input('jobtitle');
-		echo $this->Form->input('iproid');
-		echo $this->Form->input('Project');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<div id="content-header">
+    <h1>New Team Member</h1>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Costs'), array('controller' => 'costs', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cost'), array('controller' => 'costs', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Projects'), array('controller' => 'projects', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Project'), array('controller' => 'projects', 'action' => 'add')); ?> </li>
-	</ul>
+<div class="users form container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon">
+						<i class="icon-align-justify"></i>
+					</span>
+					<h5><?php echo __('New Team Member'); ?></h5>
+				</div>
+				<div class="widget-content nopadding">
+					<?php echo $this->Form->create('User', array( 'class' => 'form-horizontal',
+																			  'inputDefaults' => array(
+																			        'label' => false,
+																			        'div' => array('class' => 'controls')
+																			    )
+																	)
+													); 
+					?>
+				<fieldset>
+					<div class="control-group">
+								<div class="control-label">First Name</div>
+								<?php echo $this->Form->input('firstname');  ?>
+					</div>
+					<div class="control-group">
+								<div class="control-label">Last Name</div>
+								<?php 	echo $this->Form->input('lastname'); ?>
+					</div>
+					<div class="control-group">
+								<div class="control-label">Email</div>
+								<?php 	echo $this->Form->input('email');  ?>
+					</div>
+					<div class="control-group">
+								<div class="control-label">Cost (Rate per Hour)</div>
+								<?php 	echo $this->Form->input('costrate');  ?>
+					</div>
+					<div class="control-group">
+								<div class="control-label">Job Title</div>
+								<?php 	echo $this->Form->input('jobtitle');  ?>
+					</div>
+					<div class="control-group">
+								<div class="control-label">IPRO ID</div>
+								<?php 	echo $this->Form->input('iproid');  ?>
+					</div>
+					<div class="form-actions">
+							<button class="btn btn-primary" type="submit">Submit</button>
+						</div>
+				</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -31,6 +31,8 @@ $(document).ready(function(){
             submenus_parents.removeClass('open');
             li.addClass('open');
         }
+
+
     });
 
     var ul = $('#sidebar > ul');
@@ -47,6 +49,8 @@ $(document).ready(function(){
             sidebar.addClass('open');
             ul.slideDown(250);
         }
+
+
     });
 
     $(function(){
@@ -54,6 +58,15 @@ $(document).ready(function(){
             e.preventDefault();
             $(this).parent().addClass('active'). // <li>
             siblings().removeClass('active');
+            //get the href link clicked
+            var addressValue = $(this).attr("href");
+            console.log(addressValue );
+            if ( addressValue !== '#') {
+                // fetch (Ajax) the content of the view
+                $.get(addressValue, function(data){
+                    $('#content').html(data);
+                });
+            }
         });
     });
 
@@ -128,11 +141,23 @@ $(document).ready(function(){
     $(this).css({'border-color':'#aaaaaa'});
     });
 
-    $("div.widget-title").click(function () {
+
+    // slide up and down all the boxes
+    $("div.widget-title").live("click", function () {
       if ($(this).next().is(":hidden")) {
         $(this).next().show("slow");
       } else {
         $(this).next().slideUp( );
       }
     });
+
+    $('#spinner')
+    .hide()  // hide it initially
+    .ajaxStart(function() {
+        $(this).show();
+    })
+    .ajaxStop(function() {
+        $(this).hide();
+    });
+
 }); 

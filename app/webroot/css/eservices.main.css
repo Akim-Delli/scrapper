@@ -175,6 +175,7 @@ border-bottom: 0;
 /* Content */
 #content {
 background: none repeat scroll 0 0 #eeeeee;
+margin-top: -38px;
 margin-left: 220px;
 margin-right: 0;
 padding-bottom: 25px;
@@ -196,7 +197,7 @@ min-height: 80px; /*FIX: Use MIN-height... Allow header to get bigger for larger
 /*position: absolute; FIX: This breaks layout significantly when spelled correctly*/
 padding-top: 5px; /*FIX: Allows h1 to not have to be absolutely positioned and control it's parent's height*/
 width: 100%;
-margin-top: -38px;
+margin-top: -8px;
 z-index: 20;
 }
 #content-header h1 {

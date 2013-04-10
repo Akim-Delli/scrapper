@@ -17,7 +17,8 @@ class DashboardController extends AppController {
      */
     public function index() {
 
-        
+        //Disable the layout
+        $this->layout = false;
 
         $projectsListId = $this->Project->find('list', array('fields'     => array('id', 'project_name')));
         $usersRatePerHour = $this->User->find('list', array('fields' => array('firstname', 'costrate')));
