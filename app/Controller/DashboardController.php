@@ -62,12 +62,16 @@ class DashboardController extends AppController {
 
             //  cost form Post request
             if ($this->request->is('post')) {
-            $this->Cost->create();
-            if ($this->Cost->save($this->request->data)) {
-                $this->Session->setFlash(__('Cost saved.', 'default', array('class' => 'alert alert-info')));
-            } else {
+                $this->Cost->create();
+                if ($this->Cost->save($this->request->data)) {
+                    echo "cost succefully saved";
+                    $this->render(false);
+                    //$this->Session->setFlash(__('Cost saved.', 'default', array('class' => 'alert alert-info')));
+                } else {
+                    echo "Couldn't saved the cost!";
+                    $this->render(false);
+                }
             }
-        }
     } 
     /**
      * Format an array of array into a string of x,y pairs

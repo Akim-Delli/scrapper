@@ -57,4 +57,4 @@
         </div>
     </div>
 </div>
-
+<div id="log" class="container-fluid"></div>

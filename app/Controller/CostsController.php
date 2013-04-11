@@ -44,7 +44,8 @@ class CostsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Cost->create();
 			if ($this->Cost->save($this->request->data)) {
-				$this->flash(__('Cost saved.'), array('action' => 'index'));
+				degug("cost saved correctly");
+				//$this->flash(__('Cost saved.'));
 			} else {
 			}
 		}
