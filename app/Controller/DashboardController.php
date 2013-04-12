@@ -64,7 +64,11 @@ class DashboardController extends AppController {
             if ($this->request->is('post')) {
                 $this->Cost->create();
                 if ($this->Cost->save($this->request->data)) {
-                    echo "cost succefully saved";
+
+                    echo '<strong>' . $this->request->data['Cost']['billinghours'] .
+                         '</strong> hours were added to the <strong>' . 
+                          $projectslist[$this->request->data['Cost']['project_id']] .
+                          '</strong> project for <strong>' .  $usersfirstname[$this->request->data['Cost']['user_id']] . '</strong>';
                     $this->render(false);
                     //$this->Session->setFlash(__('Cost saved.', 'default', array('class' => 'alert alert-info')));
                 } else {

@@ -88,7 +88,7 @@ $cakeDescription = __d('cake_dev', 'eServices: Project Cost Tracker');
 	            		</ul>
 	            </li>
 
-            	<li><a href='/costs/add'><i class="icon icon-tasks"></i><span>Project TimeSheet</span></a></li>
+            	<li><a href='/costs/index'><i class="icon icon-tasks"></i><span>Project TimeSheet</span></a></li>
                 
                 <li class="submenu">
                 	<a href='#'>

@@ -42,7 +42,7 @@
 							<?php echo $this->Form->input('project_budget'); ?>
 						</div>
 						<div class="form-actions">
-							<button class="btn btn-primary" type="submit">Submit</button>
+							<button class="btn btn-primary" type="submit">add New Project</button>
 						</div>
 					</fieldset>
 				</div>

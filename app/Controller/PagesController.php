@@ -52,6 +52,8 @@ class PagesController extends AppController {
  * @return void
  */
 	public function display() {
+
+
 		$path = func_get_args();
 
 		$count = count($path);
@@ -70,6 +72,7 @@ class PagesController extends AppController {
 			$title_for_layout = Inflector::humanize($path[$count - 1]);
 		}
 		$this->set(compact('page', 'subpage', 'title_for_layout'));
-		$this->render(implode('/', $path));
+		//$this->render(implode('/', $path));
+		$this->render(false);
 	}
 }

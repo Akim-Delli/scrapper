@@ -1,28 +1,55 @@
-<div class="projects form">
-<?php echo $this->Form->create('Project'); ?>
-	<fieldset>
-		<legend><?php echo __('Edit Project'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('project_name');
-		echo $this->Form->input('project_billing_code');
-		echo $this->Form->input('project_description');
-		echo $this->Form->input('project_client');
-		echo $this->Form->input('project_budget');
-		echo $this->Form->input('User');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<div id="content-header">
+    <h1>Edit Project</h1>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Project.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Project.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Projects'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Costs'), array('controller' => 'costs', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cost'), array('controller' => 'costs', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-	</ul>
+<div class="projects form container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon">
+						<i class="icon-align-justify"></i>
+					</span>
+					<h5><?php echo __('Edit Project'); ?></h5>
+				</div>
+				<div class="widget-content nopadding">
+					<?php echo $this->Form->create('Project', array( 'class' => 'form-horizontal',
+																			  'inputDefaults' => array(
+																			        'label' => false,
+																			        'div' => array('class' => 'controls')
+																			    )
+																	)
+													); 
+					?>
+				<fieldset>
+					
+					<?php 	echo $this->Form->input('id'); ?>
+					
+					<div class="control-group">
+							<div class="control-label">Project Name</div>
+							<?php echo $this->Form->input('project_name'); ?>
+					</div>
+					<div class="control-group">
+							<div class="control-label">Billing Code</div>
+							<?php echo $this->Form->input('project_billing_code'); ?>
+					</div>
+					<div class="control-group">
+						<div class="control-label">Project Description</div>
+						<?php echo $this->Form->input('project_description'); ?>
+					</div>
+					<div class="control-group">
+						<div class="control-label">Project Client</div>
+						<?php echo $this->Form->input('project_client'); ?>
+					</div>
+					<div class="control-group">
+						<div class="control-label">Budget</div>
+						<?php echo $this->Form->input('project_budget'); ?>
+					</div>
+					<div class="form-actions">
+							<button class="btn btn-primary" type="submit">Update</button>
+						</div>
+				</fieldset>	
+			</div>
+			</div>
+		</div>
+	</div>
 </div>

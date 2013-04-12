@@ -71,6 +71,30 @@ $(document).ready(function(){
         });
     });
 
+    $(function(){
+        $("table a").live('click',function(e){
+            e.preventDefault();
+            
+            //get the href link clicked
+            var addressValue = $(this).attr("href");
+            console.log(addressValue );
+            if ( addressValue !== '#') {
+                // fetch (Ajax) the content of the view
+                $.get(addressValue, function(data){
+                    $('#content').html(data);
+                });
+            }
+        });
+    });
+
+    // fetch the dashboard when on first load
+    $.get('/dashboard/index', function(data){
+        $('#content').html(data);
+        // $('#content').css("display", "none");
+        // $('#content').fadeIn();
+    });
+
+
     // === Resize window related === //
     $(window).resize(function()
     {
@@ -185,7 +209,6 @@ $(document).ready(function(){
         // serialize the data in the form
         var serializedData = $form.serialize();
 
-        alert(serializedData);
         // let's disable the inputs for the duration of the ajax request
         $inputs.prop("disabled", true);
 
@@ -201,7 +224,7 @@ $(document).ready(function(){
             // log a message to the console
              
              $('<div class="alert alert-info"/>')
-                .append('Billing Hours ' + response + '<a class="close" data-dismiss="alert" href="#">×</a>')
+                .append( response + '<a class="close" data-dismiss="alert" href="#">×</a>')
                 .appendTo('#log')
                 .hide().fadeIn();
                 
