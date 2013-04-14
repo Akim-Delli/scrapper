@@ -47,17 +47,17 @@ class DashboardController extends AppController {
                 }           
             }
             
-            $finalHcliteralSeries[] = $this->_formatSerieToHighchartsTotalCost($arrTotalBillingHours) . $this->_formatSerieToHighcharts( $arrBillingHoursUsers);           
+            $finalHcliteralSeries[] = $this->_formatBudgetSerieToHighcharts( $projectId) . $this->_formatSerieToHighchartsTotalCost($arrTotalBillingHours) . $this->_formatSerieToHighcharts( $arrBillingHoursUsers);           
+            $totalCosts[] = $this->_calculateTotalCost( $arrTotalBillingHours);
         }
             $this->set('finalHcliteralSeries', $finalHcliteralSeries );
 
             $users = $this->Cost->User->find('list');
             $usersfirstname = $this->Cost->User->find('list', array('fields'  => 'User.firstname'));
 
-            $projects = $this->Cost->Project->find('list');
+            $projects = $this->Cost->Project->find('all');
             $projectslist = $this->Cost->Project->find('list', array('fields'  => 'Project.project_name'));
-            $this->set(compact('users', 'usersfirstname', 'projects', 'projectslist'));
-
+            $this->set(compact('users', 'usersfirstname', 'projects', 'projectslist', 'totalCosts'));
 
 
             //  cost form Post request
@@ -125,5 +125,41 @@ class DashboardController extends AppController {
             $totalCostHcliteralSeries = $totalCostHcliteralSeries . "]} ,";
         }
         return $totalCostHcliteralSeries;
+    }
+
+    protected function _formatBudgetSerieToHighcharts( $projectId) { 
+
+        if ( isset( $projectId)) {
+            $budget = $this->_getProjectBudget( $projectId);
+            $BudgetHcliteralSeries = "{ name: 'Budget', color : '#ff4e50', data : [[1357020060000, $budget],[1388469600000, $budget]]},";   
+        }else {
+            return "";
+        }
+        return $BudgetHcliteralSeries;
+    }
+
+    protected function _getProjectBudget( $projectId){
+        if ( isset( $projectId)) {
+            $arrBudget = $this->Project->findById($projectId, array('project_budget'));
+            $budget = $arrBudget['Project']['project_budget'];
+        }
+        return $budget;
+    }
+
+    protected function _calculateTotalCost( $arrTotalBillingHours ) { 
+
+        if ( !empty( $arrTotalBillingHours)) {
+           
+            $totalCost = 0;
+
+            foreach ( $arrTotalBillingHours as $arrBillHour) {
+               
+                $totalCost = $totalCost + $arrBillHour[1];    
+            }
+            return $totalCost;
+        } else {
+            return 0;
+        }
+        
     }
 }

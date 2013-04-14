@@ -4,6 +4,9 @@
 **/
 $(document).ready(function(){
 
+    // close the add billing hours at load                             
+    $('div.widget-title').hide();
+
     // === Sidebar navigation === //
     $('.submenu > a').click(function(e)
     {
@@ -175,6 +178,9 @@ $(document).ready(function(){
         $(this).next().slideUp( );
       }
     });
+
+    
+       
 
     $('#spinner')
     .hide()  // hide it initially

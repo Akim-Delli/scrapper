@@ -1,5 +1,5 @@
-<?php echo $this->Html->script('http://code.highcharts.com/highcharts.js'); ?>
-<?php echo $this->Html->script('http://code.highcharts.com/modules/exporting.js'); ?>
+<?php //echo $this->Html->script('http://code.highcharts.com/highcharts.js'); ?>
+<?php //echo $this->Html->script('http://code.highcharts.com/modules/exporting.js'); ?>
 
 <?php //echo $this->Html->script('charts/eservices-highcharts'); ?>
 <?php //debug( $finalHcliteralSeries)?>
@@ -17,7 +17,9 @@
         //debug($finalHcliteralSerie);
         echo $this->element('highchartsAndFrame', array('finalHcliteralSerie' => $finalHcliteralSerie, 
                                                         'SerieId'             => $SerieId, 
-                                                        'ProjectName'         => $projectslist[$SerieId]));
+                                                        'ProjectName'         => $projectslist[$SerieId],
+                                                        'Projects'            => $projects,
+                                                        'TotalCosts'          =>  $totalCosts));
         $SerieId ++;
     }
     ?>  

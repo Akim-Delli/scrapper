@@ -8,7 +8,7 @@
                     </span>
                     <h5>Add Billing Hours</h5>
                 </div>
-                <div class="widget-content nopadding">
+                <div class="widget-content nopadding" style="display: none;">
                         <div class="costs form">
                         <?php echo $this->Form->create('Cost', array( 'class' => 'form-horizontal',
                                                                       'inputDefaults' => array(

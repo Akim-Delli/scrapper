@@ -18,32 +18,33 @@
                         <div class="row-fluid">
                             <div class="span4">
                                 <ul class="site-stats">
-                                <li>
-                                <i class="icon-user"></i>
-                                <strong>1433</strong>
-                                <small>Total Users</small>
-                                </li>
-                                <li>
-                                <i class="icon-arrow-right"></i>
-                                <strong>16</strong>
-                                <small>New Users (last week)</small>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                <i class="icon-shopping-cart"></i>
-                                <strong>259</strong>
-                                <small>Total Shop Items</small>
-                                </li>
-                                <li>
-                                <i class="icon-tag"></i>
-                                <strong>8650</strong>
-                                <small>Total Orders</small>
-                                </li>
-                                <li>
-                                <i class="icon-money"></i>
-                                <strong>29</strong>
-                                <small>Pending Orders</small>
-                                </li>
+                                    <li>
+                                        <i class="icon-tag"></i>
+                                        <?php echo $this->Number->currency($totalCosts[$SerieId -1 ], 'USD'); ?>
+                                        <small>Outstanding Cost</small>
+                                    </li>
+                                    
+                                    <li>
+                                    <i class="icon-screenshot"></i>
+                                        <?php echo $this->Number->currency($Projects[$SerieId -1 ]['Project']['project_budget'], 'USD'); ?>
+                                        <small>Budget</small>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <i class="icon-user"></i>
+                                        <?php echo $Projects[$SerieId -1 ]['Project']['project_client']; ?>
+                                        <small>Client</small>
+                                    </li>
+                                    <li>
+                                        <i class="icon-barcode"></i>
+                                        <?php echo $Projects[$SerieId -1 ]['Project']['project_billing_code']; ?>
+                                        <small>Billing Code</small>
+                                    </li>
+                                    <li>
+                                        <i class="icon-calendar"></i>
+                                        <?php echo CakeTime::format('F jS, Y', mktime()); ?>
+                                        <small>Last Update</small>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="span8">
