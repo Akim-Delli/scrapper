@@ -4,7 +4,7 @@
             <div class="widget-box">
                 <div class="widget-title">
                     <span class="icon">
-                        <i class="icon-align-justify"></i>
+                        <i class="icon-pencil"></i>
                     </span>
                     <h5>Add Billing Hours</h5>
                 </div>
@@ -29,9 +29,7 @@
                                 </div>
                                 <div class="control-group">
                                     <div class="control-label">Team Member</div>
-                                    
                                         <?php echo $this->Form->input('user_id', array( 'type'  => 'select', 'options' => $usersfirstname)); ?>
-                                    
                                 </div>
                                 <div class="control-group">
                                     <div class="control-label">Project</div>

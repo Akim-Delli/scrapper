@@ -12,7 +12,7 @@
 					<div class="users index">
 						<table id="DataTables_Table_0" class="table table-bordered table-striped table-hover data-table dataTable">
 							<tr>
-								<th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 176px;" aria-sort="descending" aria-label="Rendering engine: activate to sort column ascending">
+								<th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="descending" aria-label="Rendering engine: activate to sort column ascending">
 									<div class="DataTables_sort_wrapper">
 										<?php echo $this->Paginator->sort('id'); ?>
 										<span class="css_right ui-icon ui-icon-carat-2-n-s"></span>
@@ -32,7 +32,7 @@
 								<td><?php echo h($project['Project']['project_billing_code']); ?>&nbsp;</td>
 								<td><?php echo h($project['Project']['project_description']); ?>&nbsp;</td>
 								<td><?php echo h($project['Project']['project_client']); ?>&nbsp;</td>
-								<td><?php echo h($project['Project']['project_budget']); ?>&nbsp;</td>
+								<td><?php echo $this->Number->currency(h($project['Project']['project_budget']), 'USD', array('places'  => 0)); ?>&nbsp;</td>
 								<td class="actions">
 									<?php echo $this->Html->link(__('View'), array('action' => 'view', $project['Project']['id'])); ?>
 									<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $project['Project']['id'])); ?>

@@ -13,14 +13,14 @@
 						<div class="users index">
 							<table id="DataTables_Table_0" class="table table-bordered table-striped table-hover data-table dataTable">
 								<tr>
-									<th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 176px;" aria-sort="descending" aria-label="Rendering engine: activate to sort column ascending">
+									<th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="descending" aria-label="Rendering engine: activate to sort column ascending">
 										<div class="DataTables_sort_wrapper">
 											<?php echo $this->Paginator->sort('id'); ?></th>
-											<th><?php echo $this->Paginator->sort('date'); ?></th>
-											<th><?php echo $this->Paginator->sort('user_id'); ?></th>
-											<th><?php echo $this->Paginator->sort('project_id'); ?></th>
-											<th><?php echo $this->Paginator->sort('billinghours'); ?></th>
-											<th><?php echo $this->Paginator->sort('fixedcost'); ?></th>
+											<th><?php echo $this->Paginator->sort('date', 'Date'); ?></th>
+											<th><?php echo $this->Paginator->sort('user_id', 'User'); ?></th>
+											<th><?php echo $this->Paginator->sort('project_id', 'Team Member'); ?></th>
+											<th><?php echo $this->Paginator->sort('billinghours', 'Billing Hours'); ?></th>
+											<th><?php echo $this->Paginator->sort('fixedcost', 'Fixed Cost'); ?></th>
 											<th class="actions"><?php echo __('Actions'); ?></th>
 								</tr>
 								<?php foreach ($costs as $cost): ?>
@@ -43,18 +43,21 @@
 									</tr>
 								<?php endforeach; ?>
 							</table>
-							<p>
-							<?php
-							echo $this->Paginator->counter(array(
-							'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-							));
-							?>	</p>
-							<div class="paging">
-							<?php
-								echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-								echo $this->Paginator->numbers(array('separator' => ''));
-								echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-							?>
+							<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
+								<div id="DataTables_Table_0_filter" class="dataTables_filter">
+									<?php
+									echo $this->Paginator->counter(array(
+									'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
+									));
+									?>
+								</div>
+								<div id="DataTables_Table_0_paginate" class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers">
+								<?php
+									echo $this->Paginator->prev('< ' . __('previous'), array('class' => 'previous ui-corner-tr ui-corner-br fg-button ui-button ui-state-default'), null, array('class' => 'previous ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default disabled'));
+									echo $this->Paginator->numbers(array('separator' => '', 'class' => 'fg-button ui-button ui-state-default' ));
+									echo $this->Paginator->next(__('next') . ' >', array('class' => 'next ui-corner-tr ui-corner-br fg-button ui-button ui-state-default'), null, array('class' => 'next ui-corner-tr ui-corner-br fg-button ui-button ui-state-default disabled'));
+								?>
+								</div>
 							</div>
 						</div>
 					</div>

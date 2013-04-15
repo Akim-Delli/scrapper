@@ -228,7 +228,7 @@ position: absolute;
 top: -7px;
 }
 .container-fluid .row-fluid:first-child {
-margin-top: 20px;
+margin-top: 2px;
 }
 /* Breadcrumb */
 #breadcrumb {

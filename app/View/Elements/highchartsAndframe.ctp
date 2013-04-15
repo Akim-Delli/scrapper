@@ -20,7 +20,7 @@
                                 <ul class="site-stats">
                                     <li>
                                         <i class="icon-tag"></i>
-                                        <?php echo $this->Number->currency($totalCosts[$SerieId -1 ], 'USD'); ?>
+                                        <?php echo $this->Number->currency($totalCosts[$SerieId -1 ], 'USD', array('places'  => 0)); ?>
                                         <small>Outstanding Cost</small>
                                     </li>
                                     
