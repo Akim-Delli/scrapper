@@ -57,7 +57,9 @@ $(document).ready(function(){
 
     });
 
+    
     $(function(){
+        // Ajax on menu
         $("#sidebar a").click(function(e){
             e.preventDefault();
             $(this).parent().addClass('active'). // <li>
@@ -72,7 +74,25 @@ $(document).ready(function(){
                 });
             }
         });
+
+        // Ajax on links contained in content
+        $("#content a").live( 'click', (function(e){
+            e.preventDefault();
+            
+            //get the href link clicked
+            var addressValue = $(this).attr("href");
+            console.log(addressValue );
+            if ( addressValue !== '#') {
+                // fetch (Ajax) the content of the view
+                $.get(addressValue, function(data){
+                    $('#content').html(data);
+                });
+            }
+        }));
     });
+
+    
+   
 
     $(function(){
         $("table a").live('click',function(e){

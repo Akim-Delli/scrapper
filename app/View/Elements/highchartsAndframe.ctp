@@ -26,7 +26,7 @@
                                     
                                     <li>
                                     <i class="icon-screenshot"></i>
-                                        <?php echo $this->Number->currency($Projects[$SerieId -1 ]['Project']['project_budget'], 'USD'); ?>
+                                        <?php echo $this->Number->currency($Projects[$SerieId -1 ]['Project']['project_budget'], 'USD' , array('places'  => 0)); ?>
                                         <small>Budget</small>
                                     </li>
                                     <li class="divider"></li>
