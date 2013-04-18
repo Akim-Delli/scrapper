@@ -4,9 +4,6 @@
 **/
 $(document).ready(function(){
 
-    // close the add billing hours at load                             
-    $('div.widget-title').hide();
-
     // === Sidebar navigation === //
     $('.submenu > a').click(function(e)
     {
@@ -59,11 +56,32 @@ $(document).ready(function(){
 
     
     $(function(){
+       
+         $("#sidebar >ul >li> a").click(function(e){
+            e.preventDefault();
+
+            if(!$(this).parent().hasClass('submenu')){
+                $("#sidebar >ul >li").removeClass('active');
+                $("#sidebar >ul >li >ul >li").removeClass('active');
+                $(this).parent().addClass('active'). // <li>
+                siblings().removeClass('active');
+            } 
+        });
+
+        $("#sidebar > ul > li > ul > li > a").click(function(e){
+            e.preventDefault();
+            $("#sidebar >ul >li").removeClass('active');
+            $("#sidebar >ul >li >ul >li").removeClass('active');
+            $(this).parent().addClass('active'); // <li>
+               
+           
+        });
+
         // Ajax on menu
+
+
         $("#sidebar a").click(function(e){
             e.preventDefault();
-            $(this).parent().addClass('active'). // <li>
-            siblings().removeClass('active');
             //get the href link clicked
             var addressValue = $(this).attr("href");
             console.log(addressValue );

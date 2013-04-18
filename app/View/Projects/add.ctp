@@ -7,7 +7,7 @@
 			<div class="widget-box">
 				<div class="widget-title">
 					<span class="icon">
-						<i class="icon-align-justify"></i>
+						<i class="icon-pencil"></i>
 					</span>
 					<h5><?php echo __('New Project'); ?></h5>
 				</div>

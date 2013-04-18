@@ -66,13 +66,19 @@ $(document).ready(function() {
                 renderTo: 'container-charts-<?php echo $SerieId ?>',
                 borderWidth: 1,
                 borderColor: '#383951',
-                
             },
+            plotOptions: {
+                series: {
+                    marker: {
+                        fillColor: 'none',
+                        lineColor: null
+                    }
+                }
+           },
             xAxis: {
                 type: 'datetime',
                 dateTimeLabelFormats: {
                     month: '%e. %b',
-                    
                 }
             },
             yAxis: {
