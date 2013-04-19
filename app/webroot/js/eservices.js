@@ -73,8 +73,6 @@ $(document).ready(function(){
             $("#sidebar >ul >li").removeClass('active');
             $("#sidebar >ul >li >ul >li").removeClass('active');
             $(this).parent().addClass('active'); // <li>
-               
-           
         });
 
         // Ajax on menu
@@ -233,7 +231,7 @@ $(document).ready(function(){
 
 
 
-    // Ajaxify POST request
+    // Ajaxify POST request for dashboard
     // variable to hold request
     var request;
     // bind to the submit event of our form
@@ -266,7 +264,7 @@ $(document).ready(function(){
         // callback handler that will be called on success
         request.done(function (response, textStatus, jqXHR){
             // log a message to the console
-             
+             $.jGrowl(response, { life: 10000 });
              $('<div class="alert alert-info"/>')
                 .append( response + '<a class="close" data-dismiss="alert" href="#">×</a>')
                 .appendTo('#log')
@@ -293,6 +291,71 @@ $(document).ready(function(){
 
         
     });
+
+
+
+
+    // Ajaxify POST request 
+    // variable to hold request
+    var request;
+    // bind to the submit event of our form
+    $("form").live("submit", function(event){
+
+        // prevent default posting of form
+        event.preventDefault();
+
+        // abort any pending request
+        if (request) {
+            request.abort();
+        }
+        // setup some local variables
+        var $form = $(this);
+        // let's select and cache all the fields
+        var $inputs = $form.find("input, select, button, textarea");
+        // serialize the data in the form
+        var serializedData = $form.serialize();
+
+        // let's disable the inputs for the duration of the ajax request
+        $inputs.prop("disabled", true);
+
+        $action = $("form").attr('action'); 
+        console.log($action);
+        // fire off the request to /dashboard/index
+        var request = $.ajax({
+            url: $action,
+            type: "post",
+            data: serializedData
+        });
+
+        // callback handler that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+            $('#content').html(response);
+             $.jGrowl("success", { life: 10000 });
+             
+                
+           
+        });
+
+        // callback handler that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            // log the error to the console
+            console.error(
+                "The following error occured: "+
+                textStatus, errorThrown
+            );
+        });
+
+        // callback handler that will be called regardless
+        // if the request failed or succeeded
+        request.always(function () {
+            // reenable the inputs
+            $inputs.prop("disabled", false);
+        });
+
+        
+    });
+
+
 
 
 }); 

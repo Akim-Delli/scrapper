@@ -1539,3 +1539,17 @@ text-align: center;
 }
 } 
 
+div#jGrowl div.jGrowl-message
+   {
+       color: #FFF;
+   }
+
+div.jGrowl {
+    padding-top: 30px;
+    
+}
+div.jGrowl-notification {
+    border-radius: 5px;
+    border-style:double;
+    border-width:5px;
+}

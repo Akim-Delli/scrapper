@@ -44,7 +44,7 @@ class CostsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Cost->create();
 			if ($this->Cost->save($this->request->data)) {
-				degug("cost saved correctly");
+				debug("cost saved correctly");
 				//$this->flash(__('Cost saved.'));
 			} else {
 			}
@@ -54,7 +54,7 @@ class CostsController extends AppController {
 
 		$projects = $this->Cost->Project->find('list');
 		$projectslist = $this->Cost->Project->find('list', array('fields'  => 'Project.project_name'));
-		debug($projectslist);
+		
 		$this->set(compact('users', 'usersfirstname', 'projects', 'projectslist'));
 	}
 

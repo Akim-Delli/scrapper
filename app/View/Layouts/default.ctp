@@ -59,7 +59,9 @@ $cakeDescription = __d('cake_dev', 'eServices: Project Cost Tracker');
         //Highcharts Libraries
         echo $this->Html->script('http://code.highcharts.com/highcharts.js'); 
         echo $this->Html->script('http://code.highcharts.com/modules/exporting.js');
-
+        //JGrowl
+        echo $this->Html->script('http://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.2.12/jquery.jgrowl.min.js');
+        echo $this->Html->css('http://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.2.12/jquery.jgrowl.min.css');
 	?>
 </head>
 <body>
@@ -127,18 +129,5 @@ $cakeDescription = __d('cake_dev', 'eServices: Project Cost Tracker');
 				);
 			?>
 		</div>
-	 
-	 <?php //echo $this->element('sql_dump'); 
- // 		echo $this->Html->script('jquery-1.9.1.min');
- // 		echo $this->Html->script('jquery.ui.custom');
- // 		echo $this->Html->script('jquery.uniform');
-
-	// 	// echo $this->Html->script('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js');
- //        //echo $this->Html->script('bootstrap');
- //        echo $this->Html->script('bootstrap.min');
- //        echo $this->Html->script('select2.min');
- //        echo $this->Html->script('eservices');
-        
-	?>
 </body>
 </html>
