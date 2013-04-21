@@ -330,10 +330,7 @@ $(document).ready(function(){
         // callback handler that will be called on success
         request.done(function (response, textStatus, jqXHR){
             $('#content').html(response);
-             $.jGrowl("success", { life: 10000 });
-             
-                
-           
+             $.jGrowl("success", { life: 10000 });     
         });
 
         // callback handler that will be called on failure
@@ -350,12 +347,6 @@ $(document).ready(function(){
         request.always(function () {
             // reenable the inputs
             $inputs.prop("disabled", false);
-        });
-
-        
+        }); 
     });
-
-
-
-
 }); 

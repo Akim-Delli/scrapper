@@ -6,6 +6,9 @@
 		<div class="row-fluid">	
 			<div class="widget-box">
 				<div class="widget-title">
+					<span class="icon">
+						<i class="icon icon-th-list"></i>
+					</span>
 					<h5><?php echo __('TimeSheet'); ?></h5>
 				</div>
 				<div class="widget-content nopadding">
@@ -13,25 +16,23 @@
 						<div class="users index">
 							<table id="DataTables_Table_0" class="table table-bordered table-striped table-hover data-table dataTable">
 								<tr>
-									<th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="descending" aria-label="Rendering engine: activate to sort column ascending">
 										<div class="DataTables_sort_wrapper">
-											<?php echo $this->Paginator->sort('id'); ?></th>
+											
 											<th><?php echo $this->Paginator->sort('date', 'Date'); ?></th>
-											<th><?php echo $this->Paginator->sort('user_id', 'User'); ?></th>
-											<th><?php echo $this->Paginator->sort('project_id', 'Team Member'); ?></th>
+											<th><?php echo $this->Paginator->sort('user_id', 'Team Member'); ?></th>
+											<th><?php echo $this->Paginator->sort('project_id', 'Project'); ?></th>
 											<th><?php echo $this->Paginator->sort('billinghours', 'Billing Hours'); ?></th>
 											<th><?php echo $this->Paginator->sort('fixedcost', 'Fixed Cost'); ?></th>
 											<th class="actions"><?php echo __('Actions'); ?></th>
 								</tr>
 								<?php foreach ($costs as $cost): ?>
 									<tr>
-										<td><?php echo h($cost['Cost']['id']); ?>&nbsp;</td>
 										<td><?php echo h($cost['Cost']['date']); ?>&nbsp;</td>
 										<td>
-											<?php echo $this->Html->link($cost['User']['id'], array('controller' => 'users', 'action' => 'view', $cost['User']['id'])); ?>
+											<?php echo $this->Html->link($cost['User']['firstname'], array('controller' => 'users', 'action' => 'view', $cost['User']['id'])); ?>
 										</td>
 										<td>
-											<?php echo $this->Html->link($cost['Project']['id'], array('controller' => 'projects', 'action' => 'view', $cost['Project']['id'])); ?>
+											<?php echo $this->Html->link($cost['Project']['project_name'], array('controller' => 'projects', 'action' => 'view', $cost['Project']['id'])); ?>
 										</td>
 										<td><?php echo h($cost['Cost']['billinghours']); ?>&nbsp;</td>
 										<td><?php echo h($cost['Cost']['fixedcost']); ?>&nbsp;</td>

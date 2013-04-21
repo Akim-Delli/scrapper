@@ -37,6 +37,7 @@ $cakeDescription = __d('cake_dev', 'eServices: Project Cost Tracker');
 		echo $this->Html->css('eservices.main');
 		echo $this->Html->css('eservices.grey');
 		echo $this->Html->css('uniform');
+        echo $this->Html->css('fullcalendar');
 
         //echo $this->element('sql_dump'); 
  		echo $this->Html->script('jquery-1.9.1.min');
@@ -48,6 +49,7 @@ $cakeDescription = __d('cake_dev', 'eServices: Project Cost Tracker');
         echo $this->Html->script('bootstrap.min');
         echo $this->Html->script('select2.min');
         echo $this->Html->script('eservices');
+        echo $this->Html->script('fullcalendar.min');
         
 	
 
@@ -107,7 +109,7 @@ $cakeDescription = __d('cake_dev', 'eServices: Project Cost Tracker');
 	            		</li>
 	            	</ul>
 	            </li>
-                <li><a href=""><i class="icon icon-calendar"></i><span>Calendar</span></a></li>
+                <li><a href="/calendar/index"><i class="icon icon-calendar"></i><span>Calendar</span></a></li>
             </ul>
             		
             	
