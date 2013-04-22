@@ -110,9 +110,9 @@ class DashboardController extends AppController {
     }
 
     protected function _formatSerieToHighchartsTotalCost( $arrTotalBillingHours ) { 
-
+        $totalCostHcliteralSeries = "";
         if ( !empty( $arrTotalBillingHours)) {
-            $totalCostHcliteralSeries = "{ name: 'Total Cost', color : '#ff4e50', lineWidth: 4, data : [[1357020060000,0],";
+            $totalCostHcliteralSeries = "{ name: 'Total Cost', shadow: 'true' ,color : '#339933', lineWidth: 4, data : [[1357020060000,0],";
             $totalCost = 0;
 
             foreach ( $arrTotalBillingHours as $arrBillHour) {
