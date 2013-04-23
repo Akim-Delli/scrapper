@@ -131,7 +131,7 @@ class DashboardController extends AppController {
 
         if ( isset( $projectId)) {
             $budget = $this->_getProjectBudget( $projectId);
-            $BudgetHcliteralSeries = "{ name: 'Budget', color : '#ff4e50', data : [[1357020060000, $budget],[1388469600000, $budget]]},";   
+            $BudgetHcliteralSeries = "{ name: 'Budget', color : '#ff4e50', data : [[1357020060000, $budget],[1378011600000, $budget]]},";   
         }else {
             return "";
         }

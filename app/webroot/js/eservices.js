@@ -264,7 +264,7 @@ $(document).ready(function(){
         // callback handler that will be called on success
         request.done(function (response, textStatus, jqXHR){
             // log a message to the console
-             $.jGrowl(response, { life: 10000 });
+             $.jGrowl(response, { life: 6000 });
              $('<div class="alert alert-info"/>')
                 .append( response + '<a class="close" data-dismiss="alert" href="#">×</a>')
                 .appendTo('#log')
@@ -299,7 +299,7 @@ $(document).ready(function(){
     // variable to hold request
     var request;
     // bind to the submit event of our form
-    $("form").live("submit", function(event){
+    $("form:not('#CostIndexForm')").live("submit", function(event){
 
         // prevent default posting of form
         event.preventDefault();
@@ -330,7 +330,7 @@ $(document).ready(function(){
         // callback handler that will be called on success
         request.done(function (response, textStatus, jqXHR){
             $('#content').html(response);
-             $.jGrowl("success", { life: 10000 });     
+             $.jGrowl("Operation succeeded", { life: 6000 });     
         });
 
         // callback handler that will be called on failure
