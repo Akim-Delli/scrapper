@@ -114,6 +114,15 @@ class DashboardController extends AppController {
         if ( !empty( $arrTotalBillingHours)) {
             $totalCostHcliteralSeries = "{ name: 'Total Cost', shadow: 'true' ,color : '#339933', lineWidth: 4, data : [[1357020060000,0],";
             $totalCost = 0;
+            // merge and add value for the same timestamp
+            $arrTimestamp = array();
+            foreach ( $arrTotalBillingHours as $key => $arrBillHour) {
+                if ( $index = array_search($arrBillHour[0] , $arrTimestamp)) {
+                    $arrTotalBillingHours[ $index] [1] = $arrTotalBillingHours[ $index] [1] + $arrBillHour [1];
+                    unset($arrTotalBillingHours[ $key]);
+                }
+                 $arrTimestamp[] = $arrBillHour[0];
+            }
 
             foreach ( $arrTotalBillingHours as $arrBillHour) {
                 

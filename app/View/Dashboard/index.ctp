@@ -13,8 +13,8 @@
     echo $this->Session->flash();
     
     $SerieId = 1;
-    foreach ($finalHcliteralSeries as $finalHcliteralSerie) {
-        //debug($finalHcliteralSerie);
+    foreach ($finalHcliteralSeries as $serieId => $finalHcliteralSerie) {
+
         echo $this->element('highchartsAndFrame', array('finalHcliteralSerie' => $finalHcliteralSerie, 
                                                         'SerieId'             => $SerieId, 
                                                         'ProjectName'         => $projectslist[$SerieId],
