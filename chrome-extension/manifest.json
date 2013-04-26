@@ -1,0 +1,24 @@
+{
+  "name": "eServices TimeSheet Scrapper",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "eServices Timesheet Data Collector for the Project Cost Tracker Tool",
+  "homepage_url": "http://akimdelli.net",
+  "permissions": [
+          "http://akimdelli.net/*", 
+          "activeTab"
+        ],
+  "background": {
+    "scripts": ["scripts/jquery-2.0.0.min.js","background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://te.ipro.org/DeltekTC/*"],
+      "js": ["scripts/jquery-2.0.0.min.js", "scripts/parse.js"]
+    }
+  ]
+}
