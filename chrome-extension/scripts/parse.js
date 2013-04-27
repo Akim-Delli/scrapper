@@ -73,3 +73,12 @@ while( (billingCode = extract_element('div#udt' + i + '_2.u')) && i < 50) {
 }
 timesheet.projects = projects;
 console.log( timesheet);
+
+$.ajax({
+  type: "POST",
+  url: 'http://eservices.loc/timesheets/collect',
+  data: JSON.stringify(timesheet),
+  dataType: 'json',
+});
+console.log(timesheet.employeeName  + "Timesheet Data sent to eServices Projects Tool");
+alert(timesheet.employeeName + " Timesheet Data sent to eServices Projects Tool");

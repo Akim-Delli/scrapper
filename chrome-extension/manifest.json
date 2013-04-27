@@ -5,7 +5,9 @@
   "description": "eServices Timesheet Data Collector for the Project Cost Tracker Tool",
   "homepage_url": "http://akimdelli.net",
   "permissions": [
-          "http://akimdelli.net/*", 
+          "http://akimdelli.net/*",
+          "http://localhost/*",
+          "http://eservices.loc/*", 
           "activeTab"
         ],
   "background": {
