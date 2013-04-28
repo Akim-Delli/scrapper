@@ -61,13 +61,14 @@ while( (billingCode = extract_element('div#udt' + i + '_2.u')) && i < 50) {
 	project.chargeDescription = extract_element('div#udt' + i + '_0.u');
 
 	// loop through the timesheet table for the 14 days biweekly period
+	var time = {};
 	for (var j = 0; j < 13 ; j++) {
 		var date = extract_element('div#hrsHeaderText' + j + '.hrsHeaderText');
 		if (hours = extract_element('div#hrs' + i + '_' + j + '.d' )) {
-			project[date] = hours;
+			time[date] = hours;
 		}
 	};
-
+    project.time = time;
 	projects.push(project);
 	i++;
 }
