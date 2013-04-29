@@ -50,7 +50,7 @@ class TimesheetsController extends AppController {
                 $objJsonTimesheet = $this->request->input('json_decode');
                 $employeeName = $objJsonTimesheet->{'employeeName'};
                 $employeeIproID = $this->extract_ipro_id ( $employeeName);
-                $this->log( "Processing Timesheet data for " . $objJsonTimesheet->{'employeeName'} ." IPRO ID : " . $employeeIproID);
+                CakeLog::write( 'info', "Processing Timesheet data for " . $objJsonTimesheet->{'employeeName'} ." IPRO ID : " . $employeeIproID, 'timesheet');
                 $user = $this->User->findByIproid($employeeIproID);
 
 
@@ -58,11 +58,11 @@ class TimesheetsController extends AppController {
                 foreach ($objJsonTimesheet->{'projects'} as $arrProject) {
                     $billingCode = $arrProject->{'billingCode'};
                     if ($project = $this->Project->findByProjectBillingCode($billingCode)) {
-                        $this->log( "Project Id : " .  $project['Project']['id'] . " Project name : ". $project['Project']['project_name']);
+                        CakeLog::write('info', "Project Id : " .  $project['Project']['id'] . " Project name : ". $project['Project']['project_name'], 'timesheet');
 
                         foreach ( $arrProject->{'time'} as $date => $hours) {
                             $date = $this->convert_date( $date);
-                            $this->log('User Id : '. $user['User']['id'] . ' |Project ID: ' . $project['Project']['id'] . ' | Date : ' . $date . '| Hours : ' . $hours);
+                            CakeLog::write('info','User Id : '. $user['User']['id'] . ' |Project ID: ' . $project['Project']['id'] . ' | Date : ' . $date . '| Hours : ' . $hours, 'timesheet');
                             $CostDataToSave = array( "Cost" => array ( 'date' => $date,
                                                                        'user_id' => $user['User']['id'],
                                                                        'project_id' => $project['Project']['id'],
@@ -70,9 +70,9 @@ class TimesheetsController extends AppController {
                             );
                             $this->Cost->create();
                             if ($this->Cost->save( $CostDataToSave)) {
-                                $this->log(' Saved data successfullly');
+                                CakeLog::write('info',' Saved data successfullly', 'timesheet');
                             }else {
-                                $this->log(' Failure Saving Timesheet data'); 
+                                CakeLog::write('error',' Failure Saving Timesheet data', array('timesheet','error')); 
                             }
                         }
                     }
