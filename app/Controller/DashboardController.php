@@ -47,7 +47,7 @@ class DashboardController extends AppController {
                 }           
             }
             
-            $finalHcliteralSeries[] = $this->_formatBudgetSerieToHighcharts( $projectId) . $this->_formatSerieToHighchartsTotalCost($arrTotalBillingHours) . $this->_formatSerieToHighcharts( $arrBillingHoursUsers);           
+            $finalHcliteralSeries[] = $this->_formatBudgetSerieToHighcharts( $projectId) . $this->_formatSerieToHighchartsTotalCost($arrTotalBillingHours, $projectId) . $this->_formatSerieToHighcharts( $arrBillingHoursUsers);           
             $totalCosts[] = $this->_calculateTotalCost( $arrTotalBillingHours);
         }
             $this->set('finalHcliteralSeries', $finalHcliteralSeries );
@@ -91,7 +91,7 @@ class DashboardController extends AppController {
             $hcSeries = "";
             foreach ($arrBillingHoursUsers as $User => $arrBillingHours) {
                 // Timestamp : 1357020060000 = January 1st, 2013
-                $hcSeries = "{ name: '" . $User . "' , data : [[1357020060000,0],";
+                $hcSeries = "{ name: '" . $User . "' , visible: false, data : [[1357020060000,0],";
                 $dateVsHours = "";
                 $billingHoursCumulative = 0;
                 foreach ($arrBillingHours as $arrBillingHour) {
@@ -109,10 +109,11 @@ class DashboardController extends AppController {
         return $finalHcliteralSeries;
     }
 
-    protected function _formatSerieToHighchartsTotalCost( $arrTotalBillingHours ) { 
+    protected function _formatSerieToHighchartsTotalCost( $arrTotalBillingHours, $projectId ) { 
         $totalCostHcliteralSeries = "";
         if ( !empty( $arrTotalBillingHours)) {
-            $totalCostHcliteralSeries = "{ name: 'Total Cost', shadow: 'true' ,color : '#339933', lineWidth: 4, data : [[1357020060000,0],";
+            $budgetAsThreshold = $this->_getProjectBudget( $projectId);
+            $totalCostHcliteralSeries = "{ name: 'Total Cost',showInLegend: false,  shadow: 'true' ,color : '#FF0000', negativeColor: '#339933' , threshold: " . $budgetAsThreshold . ", lineWidth: 4, data : [[1357020060000,0],";
             $totalCost = 0;
             // merge and add value for the same timestamp
             $arrTimestamp = array();
@@ -127,7 +128,7 @@ class DashboardController extends AppController {
             foreach ( $arrTotalBillingHours as $arrBillHour) {
                 
                 $totalCost = $totalCost + $arrBillHour[1];
-                 $totalCostHcliteralSeries =  $totalCostHcliteralSeries . "[" . $arrBillHour[0] . "," . $totalCost ."],";
+                $totalCostHcliteralSeries =  $totalCostHcliteralSeries . "[" . $arrBillHour[0] . "," . $totalCost ."],";
                  
             }
             $totalCostHcliteralSeries = rtrim( $totalCostHcliteralSeries, ",");
