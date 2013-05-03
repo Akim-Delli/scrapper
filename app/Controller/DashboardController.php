@@ -23,18 +23,21 @@ class DashboardController extends AppController {
         $projectsListId = $this->Project->find('list', array('fields'     => array('id', 'project_name')));
         $usersRatePerHour = $this->User->find('list', array('fields' => array('firstname', 'costrate')));
 
-
+        $arrDueDate = array();
         foreach ( $projectsListId as $projectId => $projectName) {
              $rawData = $this->Cost->find('all', array('conditions' => array('Project.id' => $projectId),
-                                                              'fields'     => array( 'date', 'billinghours', 'fixedcost', 'User.firstname', 'Project.project_name'),
+                                                              'fields'     => array( 'date', 'billinghours', 'fixedcost', 'User.firstname', 'Project.id','Project.project_name', 'Project.due_date'),
                                                               'order' => 'date ASC',
                                                               )
                                                 );
              
              $arrBillingHoursUsers = array();
              $arrTotalBillingHours = array();
+             
+             
             foreach( $rawData as $arrData) {
-
+                $arrDueDate[$projectId]= $arrData['Project']['due_date'];
+                
                 if ( isset( $usersRatePerHour[$arrData['User']['firstname']])) {
                     // array of array of timestamp in milliseconds and billing hours time the cost per rate for each user
                     $arrBillingHoursUsers[$arrData['User']['firstname']][] =  array( strtotime($arrData['Cost']['date']) * 1000 , 
@@ -46,11 +49,13 @@ class DashboardController extends AppController {
                     throw new Exception( $arrData['User']['firstname'] . " has no cost rate per hour", 1); 
                 }           
             }
-            
+
             $finalHcliteralSeries[] = $this->_formatBudgetSerieToHighcharts( $projectId) . $this->_formatSerieToHighchartsTotalCost($arrTotalBillingHours, $projectId) . $this->_formatSerieToHighcharts( $arrBillingHoursUsers);           
             $totalCosts[] = $this->_calculateTotalCost( $arrTotalBillingHours);
         }
             $this->set('finalHcliteralSeries', $finalHcliteralSeries );
+            $this->set('arrDueDate', $arrDueDate);
+            //debug( $arrDueDate);
 
             $users = $this->Cost->User->find('list');
             $usersfirstname = $this->Cost->User->find('list', array('fields'  => 'User.firstname'));

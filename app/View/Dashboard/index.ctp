@@ -8,14 +8,17 @@
 
     
     $SerieId = 1;
+
     foreach ($finalHcliteralSeries as $serieId => $finalHcliteralSerie) {
 
         echo $this->element('highchartsAndFrame', array('finalHcliteralSerie' => $finalHcliteralSerie, 
                                                         'SerieId'             => $SerieId, 
                                                         'ProjectName'         => $projectslist[$SerieId],
                                                         'Projects'            => $projects,
-                                                        'TotalCosts'          =>  $totalCosts));
+                                                        'TotalCosts'          => $totalCosts,
+                                                        'DueDate'            => $arrDueDate[$SerieId]));
         $SerieId ++;
+     //debug($arrDueDate);    
     }
     ?>  
 </div>

@@ -26,6 +26,7 @@
 								<th><?php echo $this->Paginator->sort('project_description'); ?></th>
 								<th><?php echo $this->Paginator->sort('project_client'); ?></th>
 								<th><?php echo $this->Paginator->sort('project_budget'); ?></th>
+								<th><?php echo $this->Paginator->sort('due_date'); ?></th>
 								<th class="actions"><?php echo __('Actions'); ?></th>
 							</tr>
 							<?php foreach ($projects as $project): ?>
@@ -36,6 +37,8 @@
 								<td><?php echo h($project['Project']['project_description']); ?>&nbsp;</td>
 								<td><?php echo h($project['Project']['project_client']); ?>&nbsp;</td>
 								<td><?php echo $this->Number->currency(h($project['Project']['project_budget']), 'USD', array('places'  => 0)); ?>&nbsp;</td>
+								<td><?php echo h($project['Project']['due_date']); ?>&nbsp;</td>
+
 								<td class="actions">
 									<?php echo $this->Html->link(__('View'), array('action' => 'view', $project['Project']['id'])); ?>
 									<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $project['Project']['id'])); ?>

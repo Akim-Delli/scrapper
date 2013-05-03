@@ -41,6 +41,10 @@
 							<div class="control-label">Budget</div>
 							<?php echo $this->Form->input('project_budget'); ?>
 						</div>
+						<div class="control-group">
+							<div class="control-label">Due Date</div>
+							<?php echo $this->Form->input('due_date'); ?>
+						</div>
 						<div class="form-actions">
 							<button class="btn btn-primary" type="submit">add New Project</button>
 						</div>

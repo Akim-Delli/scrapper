@@ -15,42 +15,11 @@
                         </div>
                     </div>
                     <div class="widget-content">
-                        <div class="row-fluid">
-                            <div class="span4">
-                                <ul class="site-stats">
-                                    <li>
-                                        <i class="icon-tag"></i>
-                                        <?php echo $this->Number->currency($totalCosts[$SerieId -1 ], 'USD', array('places'  => 0)); ?>
-                                        <small>Outstanding Cost</small>
-                                    </li>
-                                    
-                                    <li>
-                                    <i class="icon-screenshot"></i>
-                                        <?php echo $this->Number->currency($Projects[$SerieId -1 ]['Project']['project_budget'], 'USD' , array('places'  => 0)); ?>
-                                        <small>Budget</small>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <i class="icon-user"></i>
-                                        <?php echo $Projects[$SerieId -1 ]['Project']['project_client']; ?>
-                                        <small>Client</small>
-                                    </li>
-                                    <li>
-                                        <i class="icon-barcode"></i>
-                                        <?php echo $Projects[$SerieId -1 ]['Project']['project_billing_code']; ?>
-                                        <small>Billing Code</small>
-                                    </li>
-                                    <li>
-                                        <i class="icon-calendar"></i>
-                                        <?php echo CakeTime::format('F jS, Y', mktime()); ?>
-                                        <small>Last Update</small>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="span8">
+                        
+                            
+                            
                                 <div class="widget-content chart" id="container-charts-<?php echo $SerieId ?>" style="padding: 0px; position: relative; width:100%; height:400px;"></div>
-                            </div>
-                        </div>
+                            
                     </div>
                 </div>
             </div>
@@ -83,14 +52,16 @@ $(document).ready(function() {
 
                 }
            },
+           
             xAxis: {
                 type: 'datetime',
                 dateTimeLabelFormats: {
                     month: '%e. %b',
                 },
                 plotBands : [{
-                    from : 1370062800000,
-                    to : 1378011600000,
+                    //if a due date is set then timestamp it in ms, otherwise from 1767160800000 to 1767160800000
+                    from : <?php echo ((strtotime($DueDate))? strtotime($DueDate) * 1000 : 1767160800000) ?>,
+                    to : 1767160800000,
                     color : 'rgba(68, 170, 213, 0.2)',
                     label : {
                         text : 'Project Overdue'
@@ -114,7 +85,7 @@ $(document).ready(function() {
 
         var charts = $('#container-charts-<?php echo $SerieId ?>').highcharts({
             title: {
-                text: '<?php echo $ProjectName; ?>' + 'Project Cost' 
+                text: '<?php echo $ProjectName; ?>' + 'Project Cost'
             },
  
 
@@ -130,14 +101,23 @@ $(document).ready(function() {
     position: 'absolute',
     backgroundColor: 'rgba(255, 0, 0, 1)',
     opacity: 0.3,
-    textAlign: 'center'
+    textAlign: 'center',
+    color : 'blue',
+};
+Highcharts.charts[0].options.loading.labelStyle = {
+    top : '50%',
+    color: 'white',
+    'font-size': '50pt',
 };
  console.log(Highcharts.charts[0].showLoading('Project out of Budget'));
   console.log(Highcharts.charts[0].backgroundColor = 'Project out of Budget');
-  alert ('Project out of Budget');
+  //alert ('Project out of Budget');
 
-
+$('#highcharts-0').mouseover(function() {
+   Highcharts.charts[0].hideLoading();
+});
 
     });
 });
+
 </script>

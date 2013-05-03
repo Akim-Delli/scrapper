@@ -42,6 +42,11 @@
 						<?php echo h($project['Project']['project_budget']); ?>
 						&nbsp;
 					</dd>
+					<dt><?php echo __('Due Date'); ?></dt>
+					<dd>
+						<?php echo h($project['Project']['due_date']); ?>
+						&nbsp;
+					</dd>
 				</dl>
 			</div>
 			<div class="actions">
@@ -69,14 +74,13 @@
 				<th><?php echo __('Id'); ?></th>
 				<th><?php echo __('Date'); ?></th>
 				<th><?php echo __('User Id'); ?></th>
-				<th><?php echo __('Project Id'); ?></th>
-				<th><?php echo __('Billinghours'); ?></th>
-				<th><?php echo __('Fixedcost'); ?></th>
+				<th><?php echo __('Project'); ?></th>
+				<th><?php echo __('Billing Hours'); ?></th>
+				<th><?php echo __('Fixed Cost'); ?></th>
 				<th class="actions"><?php echo __('Actions'); ?></th>
 			</tr>
 			<?php
 				$i = 0;
-				debug($project);
 				foreach ($project['Cost'] as $cost): ?>
 				<tr>
 					<td><?php echo $cost['id']; ?></td>
