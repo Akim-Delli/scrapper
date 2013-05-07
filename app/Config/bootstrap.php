@@ -107,6 +107,11 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+CakeLog::config('warning', array(
+    'engine' => 'FileLog',
+    'types' => array('warning'),
+    'file' => 'warning',
+));
 // custom log for chrome extension json data request for processing
 CakeLog::config('timesheet', array(
     'engine' => 'FileLog',
