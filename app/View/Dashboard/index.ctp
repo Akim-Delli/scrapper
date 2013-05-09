@@ -7,7 +7,9 @@
     echo $this->element('addcostform', array('usersfirstname', 'projectslist')); 
 
     
-    
+    //$SerieId = 1;
+    //debug($finalHcliteralSeries);
+   
     foreach ($finalHcliteralSeries as $serieId => $finalHcliteralSerie) {
 
         echo $this->element('highchartsAndFrame', array('finalHcliteralSerie' => $finalHcliteralSerie, 
