@@ -23,9 +23,9 @@
                     </div>
                 </div>
             </div>
-        
     </div>
 </div>
+ 
 <script type="text/javascript">
 $(document).ready(function() {
     $(function () { 
@@ -36,8 +36,6 @@ $(document).ready(function() {
                 borderWidth: 1,
                 borderColor: '#383951',
                 //backgroundColor: 'rgba(255, 0, 0, 0.3)',
-
-                
             },
             plotOptions: {
                 series: {
@@ -52,7 +50,7 @@ $(document).ready(function() {
                         x: 5,
                         y: 4,
                         formatter: function() {
-                            console.log(this.series.data[this.series.data.length - 1]);
+                            // console.log(this.series.data[this.series.data.length - 1]);
                             //if the current point is the last point of the serie
                             if (this.point.x == this.series.data[this.series.data.length - 1].x) {
                                 //How to print a number with commas as thousands separators
@@ -95,8 +93,8 @@ $(document).ready(function() {
             },
 
         });
-
-        var charts = $('#container-charts-<?php echo $SerieId ?>').highcharts({
+            
+         var charts = $('#container-charts-<?php echo $SerieId ?>').highcharts({
             title: {
                 text: '<?php echo $ProjectName; ?>' + ' Project Cost'
             },
@@ -108,40 +106,40 @@ $(document).ready(function() {
            
         });
  //Highcharts.setOptions({ chart:{ backgroundColor : 'rgba(255, 0, 0, 0.3)'}});
-         console.log(Highcharts.charts[0].series[1].data.length);
-          
-         var chartNumber = <?php echo ($SerieId - 1) ?>;
-         var chartNumberContainer = <?php echo ($SerieId) ?>;
-
-         var totalCost = Highcharts.charts[chartNumber].series[1].data[Highcharts.charts[chartNumber].series[1].data.length - 1].y;
-         var budget    = Highcharts.charts[chartNumber].series[0].data[Highcharts.charts[chartNumber].series[0].data.length - 1].y;
-
-        
-         console.log(chartNumber + " " + totalCost + " " + budget);
-         if (totalCost > budget) {
+        console.log(Highcharts);
          
-             Highcharts.charts[chartNumber].options.loading.style = {
-                position: 'absolute',
-                backgroundColor: 'rgba(255, 0, 0, 1)',
-                opacity: 0.3,
-                textAlign: 'center',
-                color : 'blue',
-            };
-            Highcharts.charts[chartNumber].options.loading.labelStyle = {
-                top : '50em',
-                color: 'white',
-                'font-size': '20pt',
-            };
-           
+        var chartNumber = <?php echo ($SerieId -1 ) ?>;
+        for (var i = 0, j = Highcharts.charts.length; i < j; i += 1) {  
+   
+             var chartNumberContainer = <?php echo ($SerieId) ?>;
 
-            console.log(Highcharts.charts[chartNumber].showLoading('Project out of Budget'));
-             $('#container-charts-'+chartNumberContainer).mouseover(function() {
-               Highcharts.charts[chartNumber].hideLoading();
-            });
-        }  
+             var totalCost = Highcharts.charts[chartNumber].series[1].data[Highcharts.charts[chartNumber].series[1].data.length - 1].y;
+             var budget    = Highcharts.charts[chartNumber].series[0].data[Highcharts.charts[chartNumber].series[0].data.length - 1].y;
 
         
+            //console.log(chartNumber + " " + totalCost + " " + budget);
+            if (totalCost > budget) {
+             
+                 Highcharts.charts[chartNumber].options.loading.style = {
+                    position: 'absolute',
+                    backgroundColor: 'rgba(255, 0, 0, 1)',
+                    opacity: 0.3,
+                    textAlign: 'center',
+                    color : 'blue',
+                };
+                Highcharts.charts[chartNumber].options.loading.labelStyle = {
+                    top : '50em',
+                    color: 'white',
+                    'font-size': '20pt',
+                };
+               
+                console.log(Highcharts.charts[chartNumber].showLoading('Project out of Budget'));
+                 $('#container-charts-'+chartNumberContainer).mouseover(function() {
+                   Highcharts.charts[chartNumber].hideLoading();
+                });
+            }
+        }       
     });
-});
+}); // end document ready
 
 </script>

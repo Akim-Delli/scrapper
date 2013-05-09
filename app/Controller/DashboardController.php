@@ -50,8 +50,8 @@ class DashboardController extends AppController {
                 }           
             }
 
-            $finalHcliteralSeries[] = $this->_formatBudgetSerieToHighcharts( $projectId) . $this->_formatSerieToHighchartsTotalCost($arrTotalBillingHours, $projectId) . $this->_formatSerieToHighcharts( $arrBillingHoursUsers);           
-            $totalCosts[] = $this->_calculateTotalCost( $arrTotalBillingHours);
+            $finalHcliteralSeries[$projectId] = $this->_formatBudgetSerieToHighcharts( $projectId) . $this->_formatSerieToHighchartsTotalCost($arrTotalBillingHours, $projectId) . $this->_formatSerieToHighcharts( $arrBillingHoursUsers);           
+            $totalCosts[$projectId] = $this->_calculateTotalCost( $arrTotalBillingHours);
         }
             $this->set('finalHcliteralSeries', $finalHcliteralSeries );
             $this->set('arrDueDate', $arrDueDate);

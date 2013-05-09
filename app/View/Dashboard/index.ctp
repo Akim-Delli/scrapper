@@ -7,18 +7,16 @@
     echo $this->element('addcostform', array('usersfirstname', 'projectslist')); 
 
     
-    $SerieId = 1;
-
+    
     foreach ($finalHcliteralSeries as $serieId => $finalHcliteralSerie) {
 
         echo $this->element('highchartsAndFrame', array('finalHcliteralSerie' => $finalHcliteralSerie, 
-                                                        'SerieId'             => $SerieId, 
-                                                        'ProjectName'         => $projectslist[$SerieId],
+                                                        'SerieId'             => $serieId, 
+                                                        'ProjectName'         => $projectslist[$serieId],
                                                         'Projects'            => $projects,
                                                         'TotalCosts'          => $totalCosts,
-                                                        'DueDate'            => $arrDueDate[$SerieId]));
-        $SerieId ++;
-     //debug($arrDueDate);    
+                                                        'DueDate'            => $arrDueDate[$serieId]));   
     }
+    
     ?>  
 </div>
