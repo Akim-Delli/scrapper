@@ -46,7 +46,9 @@
 					</div>
 					<div class="control-group">
 							<div class="control-label">Due Date</div>
-							<?php echo $this->Form->input('due_date'); ?>
+							<?php echo $this->Form->input('due_date', array('dateFormat' => 'DMY'
+											  , 'minYear' => date('Y') + 1
+                        					  , 'maxYear' => date('Y') - 1 )); ?>
 						</div>
 					<div class="form-actions">
 							<button class="btn btn-primary" type="submit">Update</button>
